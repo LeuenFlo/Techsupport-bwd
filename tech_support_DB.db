@@ -1,0 +1,66 @@
+delete database tech_support_DB;
+create database tech_support_DB;
+
+create table user (
+id int AUTO_INCREMENT PRIMARY KEY,
+firstname VARCHAR(30) NOT NULL,
+lastname VARCHAR(30) NOT NULL,
+email VARCHAR(50),
+password VARCHAR(50)
+);
+
+create table main_cat (
+id int AUTO_INCREMENT PRIMARY KEY,
+name VARCAHR(50)
+);
+
+create table middle_cat {
+id int AUTO_INCREMENT PRIMARY KEY,
+main_id int,
+name VARCAHR(50),
+FOREIGN KEY (main_id) REFERENCES main_cat(id)
+}
+
+create table detail_cat {
+id int AUTO_INCREMENT PRIMARY KEY,
+middle_id int,
+name VARCAHR(50),
+FOREIGN KEY (middle_id) REFERENCES middle_cat(id)
+}
+
+create table manual (
+id int AUTO_INCREMENT PRIMARY KEY,
+detail_id int,
+description VARCHAR(2000),
+title VARCHAR(50),
+path_pdf VARCHAR(50),
+FOREIGN KEY (detail_id) REFERENCES detail_cat(id)
+);
+
+create table comment (
+id int AUTO_INCREMENT PRIMARY KEY,
+comment_id int,
+user_id int,
+description VARCHAR(1000),
+FOREIGN KEY (comment_id) REFERENCES comment(id),
+FOREIGN KEY (user_id) REFERENCES user(id)
+);
+
+
+create table ticket {
+id int AUTO_INCREMENT PRIMARY KEY,
+user_id int,
+name VARCAHR(50),
+description VARCHAR(50),
+FOREIGN KEY (user_id) REFERENCES user(id)
+}
+
+create table image {
+id int AUTO_INCREMENT PRIMARY KEY,
+manual_id int,
+path VARCHAR(200),
+FOREIGN KEY (manual_id) REFERENCES manual(id)
+}
+
+
+
